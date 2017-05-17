@@ -1,0 +1,16 @@
+# Marker showing that the rest of the document will be formatted in yaml.
+---
+# Tells ansible which hosts this playbook applies to.
+- hosts: all
+  # Tells ansible to use sudo for all the tasks in the playbook.
+  # sudo: yes
+  become: yes
+  become_method: sudo
+  # Tasks to run on all the hosts specified above.
+  tasks:
+  - yum: name=ntp state=present
+  - service: name=ntpd state=started enabled=yes
+  #- name: Ensure NTP (For time sync) is installed.
+  #  yum: name=ntp state=present
+  # - name: Ensure NTP is running
+  #  service: name=ntpd state=started enabled=yes
