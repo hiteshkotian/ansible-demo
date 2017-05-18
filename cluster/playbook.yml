@@ -1,0 +1,11 @@
+---
+- hosts: multi
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Install Apache
+      command: yum install --quiet -y httpd httpd-devel
+    - name : Start and configure apache to run at boot
+      command: service httpd start
+    - command: chkconfig httpd on

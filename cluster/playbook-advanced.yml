@@ -1,0 +1,14 @@
+---
+- hosts: multi
+  sudo: yes
+
+  tasks:
+    - name: Install Apache
+      yum: name={{ item }} state=present
+      with_items:
+          - httpd
+          - httpd-devel
+    - name: Printing some message
+      debug: msg="System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+    - name: Make sure Apache is started and will be started at boot
+      service: name=httpd state=started enabled=yes
